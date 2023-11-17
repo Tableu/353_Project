@@ -9,6 +9,7 @@ columns = ['First Assists','Second Assists','IPP','Rebounds Created','PIM','Tota
 data = pd.read_pickle(sys.argv[1])
 data.index = data.index.set_levels([data.index.levels[0], pd.to_datetime(data.index.levels[1])])
 data = data.drop(columns = columns)
+data = data.fillna(0)
 last_season = data[data.index.get_level_values('Date') < "2023-6-20"]
 current_season = data[data.index.get_level_values('Date') > "2023-6-20"]
 

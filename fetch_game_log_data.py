@@ -82,4 +82,4 @@ for id in ids:
 
 df = pd.concat(df_list)
 print(df)
-df.to_pickle("game_log_data.pkl")
+df.to_pickle("data/game_log_data.pkl")

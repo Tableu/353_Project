@@ -24,4 +24,4 @@ for team in teams:
 players_frame = pd.DataFrame(data=data_dict, index=ids)
 players_frame.index.name = "id"
 print(players_frame)
-players_frame.to_csv("player_data.csv")
+players_frame.to_csv("data/player_data.csv")

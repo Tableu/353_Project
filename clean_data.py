@@ -16,7 +16,6 @@ game_counts = last_season.groupby(['Id']).size().to_frame('size')
 game_counts = game_counts[game_counts['size'] <= 20]
 
 last_season = last_season.drop(index = game_counts.index, level='Id')
-current_season = current_season.loc[last_season.index.get_level_values('Id'),:]
 
 last_season.to_pickle("data/last_season_game_logs.pkl")
 current_season.to_pickle("data/current_season_game_logs.pkl")

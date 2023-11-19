@@ -1,5 +1,6 @@
 import sys
 import pandas as pd
+import numpy as np
 #splits the game logs by seasons and removes players who played < 20 games last season. Also removes unrelated stats
 
 columns = ['First Assists','Second Assists','IPP','Rebounds Created','PIM','Total Penalties','Minor','Major','Misconduct','Penalties Drawn','Giveaways','Takeaways','Hits',
@@ -9,6 +10,7 @@ columns = ['First Assists','Second Assists','IPP','Rebounds Created','PIM','Tota
 data = pd.read_pickle(sys.argv[1])
 data.index = data.index.set_levels([data.index.levels[0], pd.to_datetime(data.index.levels[1])])
 data = data.drop(columns = columns)
+data.replace([np.inf, -np.inf], np.nan, inplace=True)
 data = data.fillna(0)
 last_season = data[data.index.get_level_values('Date') < "2023-6-20"]
 current_season = data[data.index.get_level_values('Date') > "2023-6-20"]

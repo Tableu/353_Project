@@ -31,4 +31,5 @@ for stat in list(avg_data.columns):
     tests['ttest'].append(ttest.pvalue)
     tests['mannwhitneyu'].append(mwu.pvalue)
 results = pd.DataFrame(data=tests)
+results = results.sort_values('stat')
 results.to_csv('data/analysis_results.csv')

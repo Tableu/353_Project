@@ -15,12 +15,12 @@ no_points_avg_data = avg_data.loc[no_points_data.index]
 has_points_data = data[data['Total Points'] > 0]
 has_points_avg_data = avg_data.loc[has_points_data.index]
 
-tests = {'stat': [], 'has_points': [], 'no_points': [], 'variance': [], 'ttest': [], 'mannwhitneyu': []}
+tests = {'stat': [], 'has_points normal test': [], 'no_points normal test': [], 'variance test': [], 'ttest': [], 'mannwhitneyu': []}
 for stat in list(avg_data.columns):
     tests['stat'].append(stat)
-    tests['has_points'].append(stats.normaltest(no_points_avg_data[stat]).pvalue)
-    tests['no_points'].append(stats.normaltest(has_points_avg_data[stat]).pvalue)
-    tests['variance'].append(stats.levene(no_points_avg_data[stat], has_points_avg_data[stat]).pvalue)
+    tests['has_points normal test'].append(stats.normaltest(no_points_avg_data[stat]).pvalue)
+    tests['no_points normal test'].append(stats.normaltest(has_points_avg_data[stat]).pvalue)
+    tests['variance test'].append(stats.levene(no_points_avg_data[stat], has_points_avg_data[stat]).pvalue)
     plt.clf()
     plt.hist(no_points_avg_data[stat])
     plt.hist(has_points_avg_data[stat])

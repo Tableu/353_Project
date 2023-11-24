@@ -7,8 +7,9 @@ if(len(sys.argv) != 2):
     exit(1)
 data = pd.read_pickle(sys.argv[1])
 avg_data = data.drop(columns = ['Game', 'Team'])
-avg_data = avg_data.rolling(3, closed='left').mean()
+avg_data = avg_data.groupby('Id', as_index=False).rolling(3, closed='left').mean()
 avg_data = avg_data.dropna()
+avg_data = avg_data.drop(columns=['Id'])
 data = data.loc[avg_data.index]
 no_points_data = data[data['Total Points'] == 0]
 no_points_avg_data = avg_data.loc[no_points_data.index]

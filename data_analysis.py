@@ -26,6 +26,7 @@ for stat in list(avg_data.columns):
     plt.hist(no_points_avg_data[stat])
     plt.hist(has_points_avg_data[stat])
     plt.savefig('plots/'+stat+'.png')
+    plt.close()
     ttest = stats.ttest_ind(no_points_avg_data[stat], has_points_avg_data[stat])
     mwu = stats.mannwhitneyu(no_points_avg_data[stat], has_points_avg_data[stat])
     tests['ttest'].append(ttest.pvalue)
@@ -33,3 +34,38 @@ for stat in list(avg_data.columns):
 results = pd.DataFrame(data=tests)
 results = results.sort_values('stat')
 results.to_csv('data/analysis_results.csv')
+
+# correlation stats
+output = 'data/moderately_strong_correlation_stats.txt'
+current_season = pd.read_pickle('data/current_season_game_logs.pkl')
+last_season = pd.read_pickle('data/last_season_game_logs.pkl')
+all_logs = pd.concat([current_season, last_season])
+all_logs = all_logs.reset_index()
+all_logs = all_logs.drop(['Game', 'Team', 'Id', 'Date'], axis=1)
+
+X = all_logs.drop('Shots', axis=1)
+y = all_logs['Total Points']
+y.groupby(y).count().to_csv('data/Points_distribution')
+plt.hist(y)
+plt.title("Distribution of Points")
+plt.xlabel('Points')
+plt.ylabel('Frequency')
+plt.savefig('plots/Points_Histogram.png')
+y = all_logs['Shots']
+
+# plt.figure()
+with open(output, 'w') as f:
+    for column in X.columns:
+        plt.figure()
+        plt.scatter(X[column], y)
+        fit = stats.linregress(X[column], y)
+        plt.plot(X[column], ((X[column]*fit.slope) + fit.intercept), 'r-', linewidth=3)
+        plt.xlabel(column)
+        plt.ylabel('shots')
+        # plt.savefig('plots/'+ str(column) + '_corr' + '.png')
+        if(fit.rvalue > 0.5):
+            f.write(str(column) + ' '+ str(fit.rvalue) + '\n')
+            plt.savefig('plots/corr_plots/'+ str(column) + '_corr' + '.png')
+            # plt.show()
+        plt.close()
+    f.close()

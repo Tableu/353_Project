@@ -52,6 +52,13 @@ plt.xlabel('Points')
 plt.ylabel('Frequency')
 plt.savefig('plots/Points_Histogram.png')
 y = all_logs['Shots']
+y.groupby(y).count().to_csv('data/Shots_distribution')
+plt.clf()
+plt.hist(y)
+plt.title("Distribution of Shots")
+plt.xlabel('Shots')
+plt.ylabel('Frequency')
+plt.savefig('plots/Shots_Histogram.png')
 
 # plt.figure()
 with open(output, 'w') as f:

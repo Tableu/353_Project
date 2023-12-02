@@ -35,7 +35,7 @@ pickle.dump(model, open('final_models/RF_shots_predictor.sav', 'wb'))
 print('\n')
 
 # Shots with correlation predictor
-X = X[['FF', 'SF', 'ixG', 'iCF', 'iCF', 'iFF', 'iSCF', 'iHDCF']] # based on the data analysis
+X = X[['FF', 'SF', 'ixG', 'iCF', 'iFF', 'iSCF', 'iHDCF']] # based on the data analysis
 
 X_train, X_valid, y_train, y_valid = train_test_split(X, y)
 model = MLPRegressor(hidden_layer_sizes=(8, 6),

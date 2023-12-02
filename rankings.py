@@ -26,7 +26,7 @@ def predictor(data):
     prediction = [0, 0, 0]
     if(player_games.shape[0] != 0):
         prediction = [model[0].predict(player_games)[0], model[1].predict(player_games)[0], 0]
-    player_games = player_games[['FF', 'SF', 'ixG', 'iCF', 'iCF', 'iFF', 'iSCF', 'iHDCF']]
+    player_games = player_games[['FF', 'SF', 'ixG', 'iCF', 'iFF', 'iSCF', 'iHDCF']]
     if(player_games.shape[0] != 0):
         prediction[2] = model[2].predict(player_games)[0]
     prediction = np.mean(prediction)

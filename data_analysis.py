@@ -66,7 +66,7 @@ with open(output, 'w') as f:
         plt.figure()
         plt.scatter(X[column], y)
         fit = stats.linregress(X[column], y)
-        plt.plot(X[column], ((X[column]*fit.slope) + fit.intercept), 'r-', linewidth=3)
+        plt.plot(X[column].values, ((X[column].values*fit.slope) + fit.intercept), 'r-', linewidth=3)
         plt.xlabel(column)
         plt.ylabel('shots')
         # plt.savefig('plots/'+ str(column) + '_corr' + '.png')

@@ -7,7 +7,10 @@ python3 clean_data.py data/game_log_data.pkl
 2: Data Analysis
 python3 data_analysis.py data/last_season_game_logs_all.pkl
 3: Training Models
+python3 train_model.py
+python3 train_model_experimentation.py
 4: Rankings and Plots
-python3 plot_top_rankings.py output/ranking_analysis.csv
 python3 rankings.py
 python3 shots_predictor.py
+python3 plot_top_rankings.py output/ranking_analysis.csv
+python3 ranking_truth_plot

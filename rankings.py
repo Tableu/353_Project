@@ -35,4 +35,6 @@ def predictor(data):
 
 players['Expected Shots'] = players.apply(predictor, axis=1)
 players = players.sort_values('Expected Shots', axis=0, ascending=False)
-players.to_csv('output/Player_rankings.csv')
+# print(players)
+players = players.set_index('id')
+players.to_csv('output/Player_rankings.csv', index='id')

@@ -27,7 +27,7 @@ print('\n')
 
 # RandForest shots predictor
 X_train, X_valid, y_train, y_valid = train_test_split(X, y)
-model = RandomForestRegressor(30, max_depth=4)
+model = RandomForestRegressor(100, max_depth=4)
 model.fit(X_train, y_train)
 print('RF Shots train score: ' + str(model.score(X_train, y_train)))
 print('RF Shots valid score: ' + str(model.score(X_valid, y_valid)))

@@ -72,7 +72,7 @@ print('\n')
 
 # RandForest shots predictor
 X_train, X_valid, y_train, y_valid = train_test_split(X, y)
-model = RandomForestRegressor(30, max_depth=4)
+model = RandomForestRegressor(100, max_depth=4)
 model.fit(X_train, y_train)
 print('RF Shots train score: ' + str(model.score(X_train, y_train)))
 print('RF Shots valid score: ' + str(model.score(X_valid, y_valid)))
@@ -85,7 +85,7 @@ print('\n')
 # PCA MLP shots predictor
 X_train, X_valid, y_train, y_valid = train_test_split(X, y)
 model = make_pipeline(
-    PCA(8), # same number of dimensions as the most the ones with moderately strong correlation
+    PCA(7), # same number of dimensions as the most the ones with moderately strong correlation
     MLPRegressor(hidden_layer_sizes=(8, 6),
                      activation='relu', solver='adam')
 )
